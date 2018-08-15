@@ -7,8 +7,11 @@ $(function(){
 	case 'Contact Us':
 		$('#contact').addClass('active');
 		break;
-	case 'All Products':
-		$('#listProducts').addClass('active');
+	case 'Products':
+		$('#products').addClass('active');
+		break;
+	case 'Service':
+		$('#service').addClass('active');
 		break;
 	default:
 		$('#listProducts').addClass('active');
