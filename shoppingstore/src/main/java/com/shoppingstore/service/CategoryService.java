@@ -8,7 +8,7 @@ public interface CategoryService {
 
 	public void addCategory(Category c);
 
-	public void uodateCategory(Category c);
+	public void updateCategory(Category c);
 
 	public List<Category> listCategory();
 

@@ -51,18 +51,26 @@ window.menu = '${title}';
 	<c:if test="${userClickProducts == true}">
 	<%@include file="./products.jsp" %>
 	</c:if>
+	<!--Load when only user click products-->
+	<c:if test="${userClickCategoryProducts == true}">
+	<%@include file="./products.jsp" %>
+	</c:if>
 	<!--Load when only user click service-->
 	<c:if test="${userClickService == true}">
 	<%@include file="./service.jsp" %>
 	</c:if>
+	<%-- <!--Load when only user click service-->
+	<c:if test="${userClickProducts == true or userClickCategoryProducts == true}">
+	<%@include file="./products.jsp" %>
+	</c:if> --%>
 	<!-- /.container -->
 
 	<!-- Footer -->
 	<%@include file="./shared/footer.jsp" %>
 
 	<!-- Bootstrap core JavaScript -->
-	<script
-		src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/jquery.js"></script>
+	
 	<script
 		src="${pageContext.request.contextPath}/resources/bootstrap.min.js"></script>
 	<script

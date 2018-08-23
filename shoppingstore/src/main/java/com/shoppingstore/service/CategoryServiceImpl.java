@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	@Override
 	@Transactional
-	public void uodateCategory(Category c) {
+	public void updateCategory(Category c) {
 		categoryDAO.updateCategory(c);
 	}
 	@Override
