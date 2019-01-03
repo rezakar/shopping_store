@@ -13,7 +13,7 @@ import com.shoppingstore.model.Products;
 public class ProductsDAOImpl implements ProductsDAO {
 	private SessionFactory sessionfactory;
 
-	public void setSessionfactory(SessionFactory sf) {
+	public void setSessionFactory(SessionFactory sf) {
 		this.sessionfactory = sf;
 	}
 
@@ -30,6 +30,7 @@ public class ProductsDAOImpl implements ProductsDAO {
 		Hibernate.initialize(p);
 		return p;
 	}
+
 	@Override
 	public void updateProducts(Products p) {
 		Session session = this.sessionfactory.getCurrentSession();
@@ -43,13 +44,15 @@ public class ProductsDAOImpl implements ProductsDAO {
 		pr.setUnit_price(p.getUnit_price());
 		session.saveOrUpdate(pr);
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Products> listProducts(){
+	public List<Products> listProducts() {
 		Session session = this.sessionfactory.getCurrentSession();
 		List<Products> listProducts = session.createQuery("from Products").list();
 		return listProducts;
 	}
+
 	@Override
 	public void removeProducts(int id) {
 		Session session = this.sessionfactory.getCurrentSession();
@@ -57,6 +60,24 @@ public class ProductsDAOImpl implements ProductsDAO {
 		if (null != p) {
 			session.delete(p);
 		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Products> listActiveProducts() {
+		Session session = this.sessionfactory.getCurrentSession();
+		List<Products> listactive = session.createQuery("from Products where is_active = true").list();
+		return listactive;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Products> listActiveProductsByCategory(int id){
+		Session session = this.sessionfactory.getCurrentSession();
+		List<Products> listactivebycategory= 
+				session.createQuery("from Products where category.categoryid = id ").list();
+		return listactivebycategory;
 		
 	}
+
 }

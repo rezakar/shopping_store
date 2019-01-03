@@ -19,7 +19,7 @@ public class Category {
 	@Column(name="image_url")
 	private String imageURL;
 	@Column(name="is_avtive")
-	private Boolean active=true;
+	private Boolean active;
 	
 	
 	public Category() {

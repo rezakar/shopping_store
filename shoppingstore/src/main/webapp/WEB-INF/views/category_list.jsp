@@ -26,7 +26,7 @@
                         <td>${category.categoryid}</td>
                         <td>${category.name}</td>
                         <td>${category.imageURL}</td>
-                        <%-- <td>${category.active}</td> --%>
+                        <td>${category.active}</td>
                         
                         <td><a href="<c:url value='/remove/${category.categoryid}' />" >Delete</a></td>
                         <td><a href="<c:url value='/category/${category.categoryid}' />" >Edit</a></td>

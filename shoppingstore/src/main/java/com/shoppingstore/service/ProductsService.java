@@ -16,4 +16,8 @@ public interface ProductsService {
 
 	public void removeProducts(int id);
 
+	public List<Products> listActiveProducts();
+
+	public List<Products> listActiveProductsByCategory(int id);
+
 }

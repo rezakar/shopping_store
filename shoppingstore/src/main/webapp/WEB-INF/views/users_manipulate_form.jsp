@@ -41,6 +41,10 @@
     <label for="contact">contact :</label>
     <form:input type="text" path="contact" class="form-control" id="contact" />
   </div>
+  <div class="form-group">
+    <label for="education">Is Enabled :</label>
+    <form:checkbox path="enabled" class="form-control" id="education" />
+  </div>
   
   
   <button type="submit" value="Save" class="btn btn-default">Submit</button>

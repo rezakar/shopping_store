@@ -16,6 +16,8 @@
 			<beans:property name="prefix" value="/WEB-INF/views/" />
 			<beans:property name="suffix" value=".jsp" />
 		</beans:bean>
+		<beans:bean id="multipartResolver"
+     	class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 		
 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -34,6 +36,7 @@
                             
              <beans:value>com.shoppingstore.model.Category</beans:value>
              <beans:value>com.shoppingstore.model.Users</beans:value>
+             <beans:value>com.shoppingstore.model.Products</beans:value>
                               
                                 
 			</beans:list>
@@ -42,7 +45,7 @@
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
-                <beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+                <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
@@ -61,6 +64,13 @@
 	<beans:bean id="usersservice" class="com.shoppingstore.service.UsersServiceImpl">
 		<beans:property name="usersDAO" ref="usersDAO"></beans:property>
      </beans:bean>
+     
+     <beans:bean id="productsDAO" class="com.shoppingstore.DAO.ProductsDAOImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="pservice" class="com.shoppingstore.service.ProductsServiceImpl">
+		<beans:property name="productsDAO" ref="productsDAO"></beans:property>
+	</beans:bean>
      
      
      
@@ -88,7 +98,7 @@
      </beans:bean> -->
      
 		
-		  <context:component-scan base-package="com.shoppingstore.controller" />
+		  <context:component-scan base-package="com.shoppingstore" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	

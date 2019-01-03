@@ -21,10 +21,10 @@
     <label for="lname">Image URL :</label>
     <form:input type="text" path="imageURL" class="form-control" id="lname" />
   </div>
-  <%-- <div class="form-group">
+  <div class="form-group">
     <label for="education">Is Active :</label>
-    <form:input type="checkbox" path="active" class="form-control" id="education" />
-  </div> --%>
+    <form:checkbox path="active" class="form-control" id="education" />
+  </div>
   
   
   <button type="submit" value="Save" class="btn btn-default">Submit</button>

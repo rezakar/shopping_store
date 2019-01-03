@@ -1,5 +1,7 @@
 package com.shoppingstore.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,10 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppingstore.model.Category;
+import com.shoppingstore.model.Products;
 import com.shoppingstore.service.CategoryService;
+import com.shoppingstore.service.ProductsService;
 
 @Controller
 public class StartWebApp {
+	private static final Logger logger = LoggerFactory.getLogger(StartWebApp.class);
+	@Autowired
+	private ProductsService productsservice;
 
 	/*
 	 * @RequestMapping(value= {"/","index"}) public String start() { return "index";
@@ -24,6 +31,10 @@ public class StartWebApp {
 	public ModelAndView home() {
 		ModelAndView mv = new ModelAndView("index");
 		mv.addObject("title", "Home");
+		
+		logger.info("Inside webstartcontroller index method - INFO");
+		logger.debug("Inside webstartcontroller index method - DEBUG");
+
 		//passing category list here
 		mv.addObject("categories",categoryservice.listCategory());
 		mv.addObject("userClickHome", true);
@@ -73,7 +84,7 @@ public class StartWebApp {
 		mv.addObject("userClickProducts", true);
 		return mv;
 	}
-	/*@RequestMapping(value = "/category/{id}/showall")
+	@RequestMapping(value = "/category/{id}/showall")
 	public ModelAndView showCategoryproducts(@PathVariable("id")int id) {
 		ModelAndView mv = new ModelAndView("index");
 		//categoryDAO to fetch a single category
@@ -87,18 +98,41 @@ public class StartWebApp {
 		mv.addObject("category", category);
 		mv.addObject("userClickCategoryProducts", true);
 		return mv;
-	}*/
-	@RequestMapping(value = "/category/{id}/showall")
+	}
+	/*@RequestMapping(value = "/category/{id}/showall")
 	public String showCategoryproducts(@PathVariable("id")int id,Model model) {
 		model.addAttribute("category", categoryservice.getCategoryByid(id));
-		//model.addAttribute("title", category.getName());
+		model.addAttribute("title", category.getName());
 		//passing category list here
 		model.addAttribute("categories",categoryservice.listCategory());
 		//passing single category here
 		
 		model.addAttribute("userClickCategoryProducts", true);
 		return "index";
+	}*/
+	
+	/*
+	 * get single products *in our main controller
+	 * 
+	 * */
+	@RequestMapping(value="/shows/{id}/product")
+	public ModelAndView showSingleProduct(@PathVariable int id) {
+		ModelAndView mv = new ModelAndView("index");
+		Products product = productsservice.getProductsById(id);
+		//update the view count
+		mv.addObject("title",product.getName());
+		mv.addObject("product",product);
+		mv.addObject("userClickShowProduct",true);
+		return mv;
 	}
+	/*@RequestMapping(value="/manage/products",method=RequestMethod.GET)
+	public ModelAndView showManageProducts() {
+		ModelAndView mv = new ModelAndView("index");
+		mv.addObject("userClickManageProducts", true);
+		mv.addObject("title", "Manage Products");
+		return mv;
+	}*/
+	
 
 	/****************crud category*********************/
 	private CategoryService categoryservice;

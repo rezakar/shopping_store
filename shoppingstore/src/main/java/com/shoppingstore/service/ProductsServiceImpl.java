@@ -37,4 +37,14 @@ public class ProductsServiceImpl implements ProductsService {
 	public void removeProducts(int id) {
 		productsDAO.removeProducts(id);
 	}
+	@Override
+	@Transactional
+	public List<Products> listActiveProducts(){
+		return productsDAO.listActiveProducts();
+	}
+	@Override
+	@Transactional
+	public List<Products> listActiveProductsByCategory(int id) {
+		return productsDAO.listActiveProductsByCategory(id);
+	}
 }

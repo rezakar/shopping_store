@@ -18,7 +18,7 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Role</th>
-                    <!-- <th>Enabled</th> -->
+                    <th>Enabled</th>
                     <th>Email</th>
                     <th>Password</th>
                     <th>Contact</th>
@@ -29,7 +29,7 @@
                         <td>${users.fname}</td>
                         <td>${users.lname}</td>
                         <td>${users.role}</td>
-                        <%-- <td>${users.enabled}</td> --%>
+                        <td>${users.enabled}</td>
                         <td>${users.email}</td>
                         <td>${users.password}</td>
                         <td>${users.contact}</td>

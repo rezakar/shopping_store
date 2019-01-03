@@ -1,22 +1,28 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html ng-app="">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Shopping Store - ${title}</title>
-<script>
-window.menu = '${title}';
-</script>
+<!-- <script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+      </script> -->
+      <script type="text/javascript">
+      window.menu = '${title}'
+      window.contextRoot = '${contextRoot}'
+      </script>
+     
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script
@@ -27,6 +33,9 @@ window.menu = '${title}';
 	href="${pageContext.request.contextPath}/resources/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/myapp.css">
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/dataTables.bootstrap.css">
+	<%-- <script src="<c:url value="/resources/myapp.js" />"></script> --%>
 </head>
 <body>
 
@@ -63,6 +72,18 @@ window.menu = '${title}';
 	<c:if test="${userClickProducts == true or userClickCategoryProducts == true}">
 	<%@include file="./products.jsp" %>
 	</c:if> --%>
+	<!--Load when only user click show product-->
+	<c:if test="${userClickShowProduct == true}">
+	<%@include file="./showsingleproduct.jsp" %>
+	</c:if>
+	<!--Load when only user click manage products-->
+	<c:if test="${userClickManageProducts == true}">
+	<%@include file="./products_form.jsp" %>
+	</c:if>
+	<!--Load when only user click manage products-->
+	<c:if test="${userClickMP == true}">
+	<%@include file="./manageProducts.jsp" %>
+	</c:if>
 	<!-- /.container -->
 
 	<!-- Footer -->
@@ -70,10 +91,13 @@ window.menu = '${title}';
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/resources/jquery.js"></script>
-	
+	<!-- DataTable plugin -->
+	<script src="${pageContext.request.contextPath}/resources/jquery.dataTables.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/dataTables.bootstrap.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/myapp.js"></script>
+		
 </body>
 </html>
