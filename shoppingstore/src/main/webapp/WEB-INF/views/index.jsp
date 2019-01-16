@@ -91,6 +91,8 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/resources/jquery.js"></script>
+	<!-- JQuery validate  -->
+	<script src="${pageContext.request.contextPath}/resources/jquery.validate.js"></script>
 	<!-- DataTable plugin -->
 	<script src="${pageContext.request.contextPath}/resources/jquery.dataTables.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/dataTables.bootstrap.js"></script>

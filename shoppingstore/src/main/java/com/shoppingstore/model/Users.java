@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="users")
 public class Users {
+	
 	@Id
 	@Column(name="userid")
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -74,6 +75,10 @@ public class Users {
 		this.contact = contact;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Users [userid=" + userid + ", fname=" + fname + ", lname=" + lname + ", role=" + role + ", enabled="
+				+ enabled + ", Password=" + Password + ", email=" + email + ", contact=" + contact + "]";
+	}
 
 }

@@ -182,7 +182,7 @@
 					<h4 class="modal-title">Add new Category</h4>
 				</div>
 				<div class="modal-body">
-					<form:form modelAttribute="category"
+					<form:form id="categoryForm" modelAttribute="category"
 						action="${contextRoot}/products/category" method="POST"
 						class="form-horizontal">
 						<%-- <form:input type="hidden" path="categoryid" /> --%>
@@ -361,6 +361,7 @@
 																									!checked);
 																				}
 																			}
+																			
 																		});
 															});
 											/****************End toggle switch***********/
@@ -369,5 +370,36 @@
 									});
 						}
 						/****************End Data set Json format for the table*******************/
+						//validation code for category modal
+																			var $categoryForm = $('#categoryForm');
+																			if($categoryForm.length){
+																			$categoryForm.validate({
+																			rules: {
+																				name: {
+																				required: true,
+																				minlength:2
+																				},
+																				imageURL: {
+																				required: true
+																				}
+																			},
+																			messages : {
+																			name : {
+																			required: 'please add the category name!',
+																			minlength:'The category name should not be less than 2 characters'
+																			},
+																			imageURL: {
+																			required: 'please add the image URL name!'
+																			}
+																			},
+																			errorElement: 'em',
+																			errorPlacement: function(error, element){
+																			//add the class of help-block
+																			error.addClass('help-block');
+																			//add the error element after the input element
+																			error.insertAfter(element);
+																			}
+																			});
+																			}
 					});
 </script>
