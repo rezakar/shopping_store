@@ -96,6 +96,8 @@
 	<script src="${pageContext.request.contextPath}/resources/dataTables.bootstrap.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/bootstrap.min.js"></script>
+		<script
+		src="${pageContext.request.contextPath}/resources/bootbox.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/myapp.js"></script>
 		

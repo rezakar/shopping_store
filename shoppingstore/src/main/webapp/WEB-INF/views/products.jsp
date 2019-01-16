@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container">
 	<div class="row">
 		<!-- would be to display sidebar -->
@@ -24,7 +25,7 @@
 					window.categoryid='${categoryid}';
 					</script>
 						<ol class="breadcrumb">
-							<licalss"breadcrumb-item"><a href="${contextRoot}/home">Home</a></li>
+							<li calss="breadcrumb-item"><a href="${contextRoot}/home">Home</a></li>
       		<li class="calss"breadcrumb-item active">Category</li>
       		<li class="calss"breadcrumb-item active">${category.name}</li>
       		

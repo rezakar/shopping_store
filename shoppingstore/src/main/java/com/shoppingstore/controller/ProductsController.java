@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shoppingstore.model.Category;
 import com.shoppingstore.model.Products;
@@ -25,6 +26,7 @@ import com.shoppingstore.service.CategoryService;
 import com.shoppingstore.service.ProductsService;
 import com.shoppingstore.service.UsersService;
 import com.shoppingstore.util.FileUploadUtility;
+import com.shoppingstore.validation.ProductValidator;
 
 @Controller
 @RequestMapping("products")
@@ -50,22 +52,44 @@ public class ProductsController {
 		if(operation!=null) {
 			if(operation.equals("products")) {
 				model.addAttribute("message", "Product Submitted Successfully!");
+			}else if(operation.equals("category")){
+				model.addAttribute("message", "Category Submitted Successfully!");
 			}
 		}
 		return "index";
+	}
+	@RequestMapping(value="/{id}/product", method=RequestMethod.GET)
+	public ModelAndView showDetailProducts(@PathVariable int id) {
+		ModelAndView mv = new ModelAndView("index");
+		mv.addObject("categorylist", cservice.listCategory());
+		mv.addObject("userslist", uservice.listUsers());
+		mv.addObject("userClickManageProducts", true);
+		mv.addObject("title", "Manage Products");
+		//Fetch product from database
+		Products nProduct = pservice.getProductsById(id);
+		//set the product fetch from database
+		mv.addObject("products", nProduct);
+		return mv;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addProducts(@Valid @ModelAttribute("products")  Products p, 
 			BindingResult result, Model model, HttpServletRequest request) {
+			//new ProductValidator().validate(p, result);
 		// check if there is error
 		if (result.hasErrors()) {
 			model.addAttribute("userClickManageProducts", true);
 			model.addAttribute("title", "Manage Products");
-			model.addAttribute("message", "Validtion failed for submit product");
+			model.addAttribute("message", "Validation failed for submit product");
 			return "index";
 		}
+		if (p.getProductsid()==0) {
+		//create Product if id is 0
 		pservice.addProducts(p);
+		}else {
+			//Update product if id is not 0
+			pservice.updateProducts(p);
+		}
 		if(!p.getFile().getOriginalFilename().equals("")) {
 			FileUploadUtility.uploadFile(request,p.getFile(), p.getCode());
 		}
@@ -93,6 +117,17 @@ public class ProductsController {
 	public String editProducts(@ModelAttribute("products") Products p) {
 		pservice.updateProducts(p);
 		return "redirect:/products/products_list";
+	}
+	@RequestMapping(value="/category", method=RequestMethod.POST)
+	public String HandleCategoryAdding(@ModelAttribute Category category
+			) {
+		cservice.addCategory(category);
+		return "redirect:/products/products_form?operation=category";
+	}
+	//returning categories for all the request mapping
+	@ModelAttribute("category")
+	public Category getCategories(){
+		return new Category();
 	}
 
 	@InitBinder

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h1 class="lead">Categories</h1>
 <div class="list-group">
 <c:forEach items="${categories}" var="category">
